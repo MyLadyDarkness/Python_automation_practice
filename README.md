@@ -67,7 +67,7 @@ python-automation-practice/
 - [5. Common solutions](#section-solutions)
 
 
-1. [Базовые импорты](docs/framework_guide.py#section-imports)
+[1. Базовые импорты](docs/framework_guide.py#section-imports)
 
 
 Фикстуры Pytest (драйвер, API-клиент)
