@@ -14,7 +14,7 @@ GUIDE для фреймворка автоматизации тестирова�
 - [2. Типичные конструкции PYTHON в автотестах](#section-patterns)
 - [3. Архитектура проекта](#section-architecture)
 - [4. Conventional Commits](#section-commits)
-- [5. Common solutions](#section-solutions)
+- [5. Решения распространеных проблем](#section-troubleshooting)
 """
 
 
