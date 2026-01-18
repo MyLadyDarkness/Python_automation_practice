@@ -5,6 +5,7 @@
 [![Selenium](https://img.shields.io/badge/Selenium-Automation-orange.svg)](https://selenium.dev)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://www.conventionalcommits.org/)
 
+
 **Практический репозиторий для системного роста от Junior к Middle QA Automation Engineer на Python.**
 
 ---
@@ -33,7 +34,7 @@ pytest tests/ -v --html=reports/report.html
 🔄 Подготовить портфолио для собеседований	Запланировано
 
 📁 Архитектура проекта
-text
+
 python-automation-practice/
 ├── docs/                    # 📚 Документация и справочники
 │   ├── framework_guide.py   # 🔗 Главный справочник (см. разделы ниже)
@@ -54,55 +55,16 @@ python-automation-practice/
 📚 Ключевые разделы справочника
 Основные паттерны и решения собраны в едином файле-справочнике:
 
+```
+#### 🏗️ Framework Guide - Оглавление
 
-# 🏗️ Framework Guide - Оглавление
-
-Быстрые ссылки:
-- [1. Базовые импорты](#section-imports)
-- [1.2. Фикстуры Pytest](#section-fixtures)  
-- [1.3. Page Object Pattern](#section-pom)
-- [2. Типичные конструкции PYTHON в автотестах](#section-patterns)
-- [3. Архитектура проекта](#section-architecture)
-- [4. Conventional Commits](#section-commits)
-- [5. Common solutions](#section-solutions)
-
-
-[1. Базовые импорты](docs/framework_guide.py#section-imports)
-<a href="docs/framework_guide.py#section-imports">1. Базовые импорты</a>
-<a href = "https://github.com/MyLadyDarkness/telega-project-tests-ui">Набор простеньких UI автотестов</a>
-
-
-Фикстуры Pytest (драйвер, API-клиент)
-
-Полезные функции для тестов
-
-2. Page Object Pattern (docs/framework_guide.py#L10)
-Базовый класс BasePage
-
-Пример реальной страницы LoginPage
-
-Ожидания и локаторы
-
-3. Python в автотестах (docs/framework_guide.py#L11)
-Работа со словарями (слияние данных)
-
-Обработка исключений (try/except/finally)
-
-Итерации (for/in в контексте тестов)
-
-4. Структура проекта (docs/framework_guide.py#L12)
-Полная схема папок и файлов
-
-Конвенции именования
-
-Быстрая справка "Что куда класть"
-
-5. Conventional Commits (docs/framework_guide.py#L13)
-Стандарт коммитов (feat, fix, docs, etc.)
-
-Примеры для разных ситуаций
-
-Автоматическая проверка
+- [1. Базовые импорты](docs/framework_guide.py#section-imports)
+- [1.2. Фикстуры Pytest](docs/framework_guide.py#section-fixtures)  
+- [1.3. Page Object Pattern](docs/framework_guide.py#section-pom)
+- [2. Типичные конструкции PYTHON в автотестах](docs/framework_guide.py#section-patterns)
+- [3. Архитектура проекта](docs/framework_guide.py#section-architecture)
+- [4. Conventional Commits](docs/framework_guide.py#section-commits)
+- [5. Решения распространеных проблем](docs/framework_guide.py#section-troubleshooting)
 
 🛠️ Технологический стек
 Технология	Назначение	Версия
