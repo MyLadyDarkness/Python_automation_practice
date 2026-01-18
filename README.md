@@ -58,13 +58,13 @@ python-automation-practice/
 ```
 #### 🏗️ Framework Guide - Оглавление
 
-- [1. Базовые импорты](docs/framework_guide.py#section-imports)
-- [1.2. Фикстуры Pytest](docs/framework_guide.py#section-fixtures)  
-- [1.3. Page Object Pattern](docs/framework_guide.py#section-pom)
-- [2. Типичные конструкции PYTHON в автотестах](docs/framework_guide.py#section-patterns)
-- [3. Архитектура проекта](docs/framework_guide.py#section-architecture)
-- [4. Conventional Commits](docs/framework_guide.py#section-commits)
-- [5. Решения распространеных проблем](docs/framework_guide.py#section-troubleshooting)
+- [1. Базовые импорты](docs/framework_guide.py#section-imports#L25)
+- [1.2. Фикстуры Pytest](docs/framework_guide.py#section-fixtures#L53)  
+- [1.3. Page Object Pattern](docs/framework_guide.py#section-pom#L68)
+- [2. Типичные конструкции PYTHON в автотестах](docs/framework_guide.py#section-patterns#L98)
+- [3. Архитектура проекта](docs/framework_guide.py#section-architecture#L208)
+- [4. Conventional Commits](docs/framework_guide.py#section-commits#L361)
+- [5. Решения распространеных проблем](docs/framework_guide.py#section-troubleshooting#L376)
 
 🛠️ Технологический стек
 Технология	Назначение	Версия
