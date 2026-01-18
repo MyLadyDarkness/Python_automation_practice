@@ -4,11 +4,56 @@ GUIDE для фреймворка автоматизации тестирова�
 Цель: обеспечить единый код-стайл и ускорить разработку стандартных компонентов.
 """
 
+"""
+# 🏗️ Framework Guide - Оглавление
+
+Быстрые ссылки:
+- [1. Базовые импорты](#section-imports)
+- [1.2. Фикстуры Pytest](#section-fixtures)  
+- [1.3. Page Object Pattern](#section-pom)
+- [2. Типичные конструкции PYTHON в автотестах](#section-patterns)
+- [3. Архитектура проекта](#section-architecture)
+- [4. Conventional Commits](#section-commits)
+- [5. Common solutions](#section-solutions)
+"""
+
 
 """ РАЗДЕЛ 1: БАЗОВЫЙ КАРКАС ФРЕЙМВОРКА """
 
+##<a id="section-imports"></a>1. Импорты для 90% файлов
 # ------------------------------------------------------------
-# 1.1. ФИКСТУРЫ PYTEST
+# 1.1 ИМПОРТЫ ДЛЯ 90% ФАЙЛОВ
+# ------------------------------------------------------------
+
+# Selenium WebDriver
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import (TimeoutException, 
+                                       NoSuchElementException,
+                                       StaleElementReferenceException,
+                                       ElementNotInteractableException)
+
+# Pytest
+import pytest
+
+# API тестирование
+import requests
+import json
+
+# Утилиты
+from datetime import datetime
+import time
+import os
+from typing import Dict, List, Optional, Any
+
+
+## <a id="section-fixtures"></a>1.2. Базовые фикстуры Pytest
+# ------------------------------------------------------------
+# 1.2. ФИКСТУРЫ PYTEST
+# ------------------------------------------------------------
+
 import pytest
 from selenium import webdriver
 
@@ -19,8 +64,12 @@ def driver():
     yield driver  # Тест выполняется здесь
     driver.quit()  # Выполнится после теста
 
+
+## <a id="#section-pom"></a>1.3. Page Object Pattern
 # ------------------------------------------------------------
-# 1.2. PAGE OBJECT PATTERN (БАЗОВАЯ СТРАНИЦА)
+# 1.3. PAGE OBJECT PATTERN (БАЗОВАЯ СТРАНИЦА)
+# ------------------------------------------------------------
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -38,13 +87,16 @@ class BasePage:
         return self.wait.until(EC.element_to_be_clickable(locator))
 
 # ------------------------------------------------------------
-# 1.3. ПРИМЕР ТЕСТА
+# 1.4. ПРИМЕР ТЕСТА
+# ------------------------------------------------------------
+
 def test_login(driver):
     page = LoginPage(driver)  # Ваш класс
     page.login("username", "password")
     assert page.is_logged_in()
 
 
+##<a id="section-patterns"></a>2. Типичные конструкции PYTHON в автотестах
 """
 РАЗДЕЛ 2: ТИПИЧНЫЕ КОНСТРУКЦИИ PYTHON В АВТОТЕСТАХ
 Примеры использования базового синтаксиса для решения практических задач QA.
@@ -53,6 +105,7 @@ def test_login(driver):
 # ------------------------------------------------------------
 # 2.1 РАБОТА СО СЛОВАРЯМИ (DICT): ПОДГОТОВКА И ПРОВЕРКА ТЕСТОВЫХ ДАННЫХ
 # ------------------------------------------------------------
+
 from selenium.common.exceptions import NoSuchElementException
 
 def merge_test_data(default_config, user_config):
@@ -154,6 +207,7 @@ def find_failed_tests(test_results):
     return failed_listcomp
 
 
+##<a id="section-architecture"></a>3. Архитектура проекта
 """
 РАЗДЕЛ 3: АРХИТЕКТУРА: СТРУКТУРА ПРОЕКТА И КОНВЕНЦИИ
 ---------------------------------------------------------------
@@ -306,6 +360,8 @@ if __name__ == "__main__":
     # Можете запустить файл, чтобы посмотреть структуру
     explain_structure()     
 
+
+##<a id="section-commits"></a>4. Conventional Commits
 """
 РАЗДЕЛ 4: Conventional Commits
 ---------------------------------------------------------------
@@ -321,7 +377,9 @@ docs: — изменения в документации
 build: — изменения в сборке/структуре
 refactor: — рефакторинг без изменения функциональности
 
-""" РАЗДЕЛ: КАК РЕШАТЬ ОБЩИЕ ПРОБЛЕМЫ """
+
+##<a id="section-solutions"></a>5. Common solutions
+""" РАЗДЕЛ 5: КАК РЕШАТЬ ОБЩИЕ ПРОБЛЕМЫ """
 # ----------------------------------------------
 # ПРОБЛЕМА: Элемент устарел (StaleElementReferenceException)
 # РЕШЕНИЕ: Повторно найти элемент внутри цикла/ожидания
