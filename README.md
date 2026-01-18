@@ -68,6 +68,8 @@ python-automation-practice/
 
 
 [1. Базовые импорты](docs/framework_guide.py#section-imports)
+<a href="docs/framework_guide.py#section-imports">1. Базовые импорты</a>
+<a href = "https://github.com/MyLadyDarkness/telega-project-tests-ui">Набор простеньких UI автотестов</a>
 
 
 Фикстуры Pytest (драйвер, API-клиент)
