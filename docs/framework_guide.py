@@ -88,10 +88,10 @@ class BasePage:
 # 1.4. ПРИМЕР ТЕСТА
 # ------------------------------------------------------------
 
-def test_login(driver):
-    page = LoginPage(driver)  # Ваш класс
-    page.login("username", "password")
-    assert page.is_logged_in()
+# def test_login(driver):
+#     page = LoginPage(driver)  # Ваш класс
+#     page.login("username", "password")
+#     assert page.is_logged_in()
 
 
 """
@@ -364,6 +364,7 @@ if __name__ == "__main__":
 Зачем: новая команда (или вы через месяц) сможет быстро разобраться.
 """
 
+"""
 Префиксы (Conventional Commits):
 
 feat: — новая функциональность
@@ -371,7 +372,7 @@ fix: — исправление бага
 docs: — изменения в документации
 build: — изменения в сборке/структуре
 refactor: — рефакторинг без изменения функциональности
-
+"""
 
 """ РАЗДЕЛ 5: КАК РЕШАТЬ ОБЩИЕ ПРОБЛЕМЫ """
 # ----------------------------------------------
