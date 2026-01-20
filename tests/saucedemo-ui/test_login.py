@@ -14,7 +14,8 @@ def test_login(driver):
 
     login_page.click((By.ID, "login-button"))
 
-    assert "https://www.saucedemo.com/inventory.html" in driver.current_url
+    assert "inventory.html" in driver.current_url
+    assert login_page.find((By.ID, "add-to-cart-sauce-labs-backpack")).text == "Add to cart"
 
 
 
