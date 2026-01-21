@@ -204,6 +204,28 @@ def find_failed_tests(test_results):
     return failed_listcomp
 
 
+# ------------------------------------------------------------
+# 2.4 БЫСТРЫЕ ПРОВЕРКИ
+# ------------------------------------------------------------
+
+# 1. Текст где-то на странице
+assert "Текст" in driver.page_source
+
+# 2. Текст в конкретном элементе
+element = driver.find_element(By.ID, "id")
+assert element.text == "Точный текст"
+
+# 3. Текст содержит подстроку
+assert "часть" in element.text
+
+# 4. Текст соответствует регулярке
+import re
+assert re.search(r'pattern', element.text)
+
+# 5. С ожиданием
+#from selenium.webdriver.support import expected_conditions as EC
+#wait.until(EC.text_to_be_present_in_element((By.ID, "id"), "Текст"))
+
 """
 РАЗДЕЛ 3: АРХИТЕКТУРА: СТРУКТУРА ПРОЕКТА И КОНВЕНЦИИ
 ---------------------------------------------------------------
