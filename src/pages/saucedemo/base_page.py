@@ -8,6 +8,11 @@ class SauceBasePage(BasePage):
         self.driver.get(f"{self.SAUCE_URL}{path}")
         return self
 
+    def standard_login(self):
+        self.send_keys((By.ID, "user-name"), "standard_user")
+        self.send_keys((By.ID, "password"), "secret_sauce")
+        self.click((By.ID, "login-button"))
+
     def login(self, login):
         self.send_keys((By.ID, "user-name"), login)
 
