@@ -1,6 +1,8 @@
 import random
 from selenium.webdriver.common.by import By
 from src.pages.saucedemo.base_page import SauceBasePage
+from src.pages.saucedemo.cart_page import CartPage
+
 
 class InventoryPage(SauceBasePage):
 
@@ -17,14 +19,14 @@ class InventoryPage(SauceBasePage):
 
         item_name =  all_items_names[random_item_index].text
         item_price = all_items_prices[random_item_index].text
-        item_descr = all_tems_descr[random_item_index].text
+        item_description = all_tems_descr[random_item_index].text
 
         all_items_buttons[random_item_index].click()
 
         return {
             "name": item_name,
             "price": item_price,
-            "descr": item_descr,
+            "description": item_description,
             "index": random_item_index  # Индекс для отладки
         }
 
@@ -38,6 +40,11 @@ class InventoryPage(SauceBasePage):
         else:
             print("Nothing to remove")
 
-    def items_cart_quantity(self, quantity):
+    def items_cart_quantity_assertions(self, quantity):
         assert self.find((By.CSS_SELECTOR, "[class=shopping_cart_badge]")).text == quantity
+
+    def go_to_cart(self):
+        self.find((By.CLASS_NAME, "shopping_cart_link")).click()
+        return CartPage(self.driver)
+
 
