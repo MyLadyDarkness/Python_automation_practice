@@ -29,3 +29,27 @@ class CartPage(SauceBasePage):
 
         with pytest.raises(NoSuchElementException):
             self.driver.find_element(By.CSS_SELECTOR, "[id*='remove']")
+
+    def checkout(self):
+        cart_items = self.driver.find_elements(By.CLASS_NAME, "cart_item")
+        if cart_items:
+            self.find((By.CSS_SELECTOR, "class*=checkout_button")).click()
+
+        else:
+            raise Exception("Cannot checkout: cart is empty")
+
+    # def purchase(self):
+    #     # cart_items = self.driver.find_elements(By.CLASS_NAME, "cart_item")
+    #     # if cart_items:
+    #     #     self.find((By.CSS_SELECTOR, "class*=checkout_button")).click()
+    #         assert self.find((By.CLASS_NAME, "title")).text == "Checkout: Your Information"
+    #
+    #         self.find((By.CSS_SELECTOR, "placeholder=First Name")).send_keys("Test First")
+    #         self.find((By.CSS_SELECTOR, "placeholder=Last Name")).send_keys("Test Last")
+    #         self.find((By.CSS_SELECTOR, "placeholder=Zip/Postal Code")).send_keys("299045")
+    #
+    #         self.find((By.ID, "continue")).click()
+    #
+    #         assert self.find((By.CLASS_NAME, "title")).text == "Checkout: Your Information"
+    #         self.find((By.ID, "finish")).click()
+
