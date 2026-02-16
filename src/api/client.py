@@ -8,8 +8,8 @@ class Client:
     def get(self, endpoint):
         return self.session.get(f"{self.base_url}{endpoint}")
 
-    def post(self, endpoint):
-        return self.session.post(f"{self.base_url}{endpoint}")
+    def post(self, endpoint, data=None):
+        return self.session.post(f"{self.base_url}{endpoint}", json=data)
 
     def put(self, endpoint):
         return self.session.put(f"{self.base_url}{endpoint}")
