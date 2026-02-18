@@ -69,3 +69,45 @@ def test_pet_creation_max_fields(pet_store, state):
     get_response = pet_store.get_pet(pet_id)
     assert get_response.status_code == 200
     assert get_response.json()["id"] == int(pet_data["id"])
+
+
+# тест проверяет, что при создании сущности с дублирующимся
+# id происходин обновление существующей записи
+def test_pet_creation_duplicate_id(pet_store):
+    random_number = random.randint(100, 999)
+    pet_data = {
+        "id": f"{random_number}",
+        "name": f"test_pet_{random_number}",
+        "photoUrls": ["string"]
+    }
+
+    response = pet_store.create_pet(pet_data)
+    pet_id = response.json()["id"]
+    print(f"pet {pet_id} {response.json()}")
+
+    assert response.status_code == 200
+    assert pet_id == int(pet_data["id"])
+    assert response.json()["name"] == pet_data["name"]
+
+    get_response = pet_store.get_pet(pet_id)
+    assert get_response.status_code == 200
+    assert pet_id == int(pet_data["id"])
+    assert get_response.json()["name"] == pet_data["name"]
+
+    pet_data_duplicate_id = {
+        "id": f"{pet_id}",
+        "name": f"test_pet_duplicate_id_{random_number}",
+        "photoUrls": ["string"]
+    }
+
+    response_duplicate_id = pet_store.create_pet(pet_data_duplicate_id)
+
+    print(f"pet {pet_id} {response_duplicate_id.json()}")
+    assert response_duplicate_id.status_code == 200
+    assert pet_id == int(pet_data["id"])
+    assert response_duplicate_id.json()["name"] == pet_data_duplicate_id["name"]
+
+    get_response = pet_store.get_pet(pet_id)
+    assert get_response.status_code == 200
+    assert pet_id == int(pet_data["id"])
+    assert get_response.json()["name"] == pet_data_duplicate_id["name"]
