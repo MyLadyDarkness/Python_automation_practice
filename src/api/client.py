@@ -5,8 +5,8 @@ class Client:
         self.base_url = base_url
         self.session = requests.Session()
 
-    def get(self, endpoint):
-        return self.session.get(f"{self.base_url}{endpoint}")
+    def get(self, endpoint, **kwargs):
+        return self.session.get(f"{self.base_url}{endpoint}", **kwargs)
 
     def post(self, endpoint, data=None):
         return self.session.post(f"{self.base_url}{endpoint}", json=data)
