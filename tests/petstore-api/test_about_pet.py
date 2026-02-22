@@ -1,9 +1,9 @@
 import random
-from zoneinfo import available_timezones
 
 import pytest
 
 from src.api.endpoints.petstore import PetStore
+from src.utils.json_helpers import find_text
 
 @pytest.fixture
 def pet_store():
@@ -59,7 +59,6 @@ def test_pet_creation_max_fields(pet_store, state):
             "status": state
         }
 
-
     response = pet_store.create_pet(pet_data)
     pet_id = response.json()["id"]
     print(f"pet {pet_id} {response.json()}")
@@ -72,7 +71,7 @@ def test_pet_creation_max_fields(pet_store, state):
 
 
 # тест проверяет, что при создании сущности с дублирующимся
-# id происходин обновление существующей записи
+# id происходит обновление существующей записи
 def test_pet_creation_duplicate_id(pet_store):
     random_number = random.randint(100, 999)
     pet_data = {
@@ -111,3 +110,38 @@ def test_pet_creation_duplicate_id(pet_store):
     assert get_response.status_code == 200
     assert pet_id == int(pet_data["id"])
     assert get_response.json()["name"] == pet_data_duplicate_id["name"]
+
+
+#тест проверяет получение списка питомцев с конкретным статусом
+@pytest.mark.parametrize("state", ["available", "pending", "sold"])
+def test_get_pets_by_status(pet_store, state):
+
+        random_number = random.randint(100, 999)
+        pet_data = {
+            "id": random_number,
+            "name": f"test_pet_{random_number}",
+            "status": state
+        }
+
+        response = pet_store.create_pet(pet_data)
+        pet_id = response.json()["id"]
+        print(f"pet {pet_id} {response.json()}")
+
+        assert response.status_code == 200
+
+        pets_by_status_response = pet_store.get_pet_by_state(state)
+        pets_by_status_json = pet_store.get_pet_by_state(state).json()
+
+        # Комбинация полей для поиска
+        found_pet = find_text(
+            pets_by_status_json,
+            id=pet_data["id"],
+            name=pet_data["name"],
+            status=state
+        )
+
+        assert found_pet is not None, f"Питомец не найден в статусе {state}"
+        assert found_pet["id"] == pet_data["id"]
+        assert found_pet["name"] == pet_data["name"]
+        assert found_pet["status"] == state
+        assert pets_by_status_response.status_code == 200
