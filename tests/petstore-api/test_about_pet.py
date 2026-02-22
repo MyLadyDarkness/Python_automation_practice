@@ -1,5 +1,5 @@
 import random
-
+import time
 import pytest
 
 from src.api.endpoints.petstore import PetStore
@@ -145,3 +145,47 @@ def test_get_pets_by_status(pet_store, state):
         assert found_pet["name"] == pet_data["name"]
         assert found_pet["status"] == state
         assert pets_by_status_response.status_code == 200
+
+
+#тест проверяет работу put-запроса для редактирования имеющейся записи
+def test_edit_pet(pet_store):
+    random_number = random.randint(100, 999)
+    pet_data = {
+        "id": random_number,
+        "name": f"test_pet_{random_number}",
+    }
+
+    pet_store.create_pet(pet_data)
+
+    pet_data["name"] = f"test_pet_put_{random_number}"
+    response = pet_store.edit_pet(pet_data)
+
+    assert response.status_code == 200
+    assert response.json()["id"] == pet_data["id"]
+    assert response.json()["name"] == pet_data["name"]
+
+
+#тест позволяет получить информаци по id
+def test_get_pet(pet_store):
+    random_number = random.randint(100, 999)
+    pet_data = {
+        "id": random_number,
+        "name": f"test_pet_{random_number}",
+    }
+    response = pet_store.create_pet(pet_data)
+    pet_store.get_pet(pet_data["id"])
+
+    assert response.status_code == 200
+    assert response.json()["id"] == pet_data["id"]
+    assert response.json()["name"] == pet_data["name"]
+
+#тест показывает: если с таким id записи нет,то сервер вернет ошибку 404
+def test_get_pet_absent(pet_store):
+    pet_id = int(time.time())
+
+    response = pet_store.get_pet(pet_id)
+
+    assert response.status_code == 404, (
+        f"Ожидался код 404 для несуществующего питомца {pet_id}, "
+        f"получен {response.status_code}"
+    )
