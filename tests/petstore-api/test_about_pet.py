@@ -1,78 +1,66 @@
 import random
 import time
+
+import allure
 import pytest
 
-from src.api.endpoints.petstore import PetStore
 from src.utils.json_helpers import find_text
 
-@pytest.fixture
-def pet_store():
-    return PetStore("https://petstore.swagger.io/v2")
+@pytest.mark.smoke
+@allure.title("Создание питомца с минимальными полями")
+@allure.feature("Питомцы")
+@allure.severity(allure.severity_level.CRITICAL)
+def test_pet_creation_min_fields(pet_store, base_pet_data, create_base_pet):
+    """Создание с id, name, photoUrls + проверка через GET"""
 
-# тест отправляет запрос с минимальным набором полей и проверяет, что объект создался
-# поле id также добавлено в тест, так как без него невозможно проверить
-# наличие объекта после создания (особенности API)
-def test_pet_creation_min_fields(pet_store):
+    with allure.step("1. Создание питомца"):
+        created_pet = create_base_pet.json()
+        assert create_base_pet.status_code == 200
+        assert created_pet["id"] == int(base_pet_data["id"])
+        assert created_pet["name"] == base_pet_data["name"]
 
-    random_number = random.randint(100,999)
-    pet_data = {
-        "id":f"{random_number}",
-        "name": f"test_pet_{random_number}",
-        "photoUrls": ["string"]
-    }
+        allure.attach(
+            f"Status created_pet: {create_base_pet.status_code}, \nBody: {created_pet}",
+            name="created_pet response",
+            attachment_type=allure.attachment_type.TEXT
+        )
 
-    response = pet_store.create_pet(pet_data)
-    pet_id = response.json()["id"]
-    print(f"pet {pet_id} {response.json()}")
+    with allure.step("2. Получение созданного питомца"):
+        get_response = pet_store.get_pet(created_pet["id"])
+        get_pet = get_response.json()
+        assert get_response.status_code == 200
+        assert get_pet["id"] == int(base_pet_data["id"])
+        assert get_pet["name"] == base_pet_data["name"]
 
-    assert response.status_code == 200
-    assert response.json()["id"] == int(pet_data["id"])
-    assert response.json()["name"] == pet_data["name"]
-
-    get_response = pet_store.get_pet(pet_id)
-    assert get_response.status_code == 200
-    assert get_response.json()["id"] == int(pet_data["id"])
-    assert get_response.json()["name"] == pet_data["name"]
+        allure.attach(
+            f"Status get_pet: {get_response.status_code}, \nBody: {get_pet}",
+            name="get_pet response",
+            attachment_type=allure.attachment_type.TEXT
+        )
 
 
-# тест отправляет запрос с максимальным набором полей и проверяет, что объект создался
 @pytest.mark.parametrize("state", ["available", "pending", "sold"])
-def test_pet_creation_max_fields(pet_store, state):
+def test_pet_creation_max_fields(pet_store, full_pet_data, create_full_pet, state):
+    """
+    Тест отправляет запрос с максимальным набором полей и проверяет,
+    что объект создался для каждого из статусов.
+    Ожидаемый результат 200.
+    """
+    assert create_full_pet.status_code == 200
 
-    random_number = random.randint(100,999)
-    pet_data = {
-            "id": random_number,
-            "category": {
-                "id": random_number,
-                "name": f"test_pet_{random_number}"
-            },
-            "name": f"test_pet_{random_number}",
-            "photoUrls": [
-                "string"
-            ],
-            "tags": [
-                {
-                    "id": random_number,
-                    "name": f"test_pet_{random_number}"
-                }
-            ],
-            "status": state
-        }
-
-    response = pet_store.create_pet(pet_data)
-    pet_id = response.json()["id"]
-    print(f"pet {pet_id} {response.json()}")
-
-    assert response.status_code == 200
-
-    get_response = pet_store.get_pet(pet_id)
+    get_response = pet_store.get_pet(create_full_pet.json()["id"])
     assert get_response.status_code == 200
-    assert get_response.json()["id"] == int(pet_data["id"])
+    assert get_response.json()["id"] == int(full_pet_data["id"])
+    ###CHECK ALL FIELDS
 
 
-# тест проверяет, что при создании сущности с дублирующимся
-# id происходит обновление существующей записи
+
 def test_pet_creation_duplicate_id(pet_store):
+    """
+    Тест проверяет, что при создании сущности с дублирующимся
+    id происходит обновление существующей записи
+    """
+
     random_number = random.randint(100, 999)
     pet_data = {
         "id": f"{random_number}",

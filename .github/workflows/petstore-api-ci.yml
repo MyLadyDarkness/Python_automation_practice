@@ -1,0 +1,33 @@
+name: Petstore API CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install allure-pytest
+
+      - name: Run smoke tests
+        run: python -m pytest tests/petstore-api/ -m smoke --alluredir=allure-results
+
+      - name: Upload Allure results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: allure-results
+          path: allure-results
