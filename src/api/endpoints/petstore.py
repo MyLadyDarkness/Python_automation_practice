@@ -15,3 +15,6 @@ class PetStore(Client):
 
     def edit_pet(self, pet_data):
         return self.put("/pet", json=pet_data)
+
+    def delete_pet(self, pet_id):
+        return self.delete(f"/pet/{pet_id}")
