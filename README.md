@@ -9,7 +9,7 @@
 **Практический репозиторий для системного роста от Junior к Middle QA Automation Engineer на Python.**
 
 ---
-[Аллюр отчеты](https://myladydarkness.github.io/Python_automation_practice/4/index.html)
+[📊 Посмотреть Allure отчеты](https://myladydarkness.github.io/Python_automation_practice/4/index.html)
 
 ## 📌 Быстрый старт
 
@@ -92,16 +92,16 @@ GitHub Actions	CI/CD	-
 ✅ Завершено
 Создана базовая структура репозитория
 Написан главный справочник (framework_guide.py)
+Настройка GitHub Actions
+Добавлен Page Object Pattern
 
 🔄 В процессе
 Реализованы базовые фикстуры Pytest
-Добавлен Page Object Pattern
 API-тестирование с Requests
 Параметризация тестов
 Генерация Allure-отчётов
 
 📅 Запланировано
-Настройка GitHub Actions
 Docker-контейнеризация тестов
 Интеграция с реальным API
 
