@@ -37,9 +37,15 @@ def full_pet_data(base_pet_data):
 @pytest.fixture(scope="function")
 def create_base_pet(pet_store, base_pet_data):
     response = pet_store.create_pet(base_pet_data)
-    #pet = response.json()
 
     yield response
 
     pet_store.delete_pet(response.json()["id"])
 
+@pytest.fixture(scope="function")
+def create_full_pet(pet_store, full_pet_data):
+    response = pet_store.create_pet(full_pet_data)
+
+    yield response
+
+    pet_store.delete_pet(response.json()["id"])
