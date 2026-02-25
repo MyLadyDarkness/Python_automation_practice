@@ -9,6 +9,7 @@
 **Практический репозиторий для системного роста от Junior к Middle QA Automation Engineer на Python.**
 
 ---
+[Аллюр отчеты](https://myladydarkness.github.io/Python_automation_practice/4/index.html)
 
 ## 📌 Быстрый старт
 
@@ -29,7 +30,7 @@ pytest tests/ -v --html=reports/report.html
 Цель	Статус
 ✅ Создать структурированный тестовый фреймворк	В процессе
 ✅ Освоить паттерны (POM, API Clients)	В процессе
-🔄 Настроить CI/CD (GitHub Actions)	Запланировано
+✅ Настроить CI/CD (GitHub Actions)	Готово
 🔄 Интегрировать Docker	Запланировано
 🔄 Подготовить портфолио для собеседований	Запланировано
 
