@@ -425,6 +425,42 @@ def safe_click(driver, locator):
 def create_pet_step(pet_store, data):
     return pet_store.create_pet(data)
 
+# декортаор для функции
 @allure.step("Проверяем, что питомец создался")
 def check_pet_created(response, expected_data):
     assert response.status_code == 200
+
+# контекстный менеджер
+    with allure.step("Проверка ответа"):
+        assert response.status_code == 200
+
+# логирование
+
+# allure.attach(
+#     str(response.json()),  # что прикрепить
+#     name="response_body",  # название в отчёте
+#     attachment_type=allure.attachment_type.JSON  # тип
+# )
+#
+# allure.attach(
+#     f"Status: {response.status_code}",
+#     name="status",
+#     attachment_type=allure.attachment_type.TEXT
+# )
+
+# запуск конкретного теста
+# pytest -k "test_pet_creation_min_fields" --alluredir=allure-results
+
+# по маркеру
+# @pytest.mark.smoke
+# @allure.title("Создание питомца с минимальными полями")
+# def test_pet_creation_min_fields(...):
+#     # ...
+# Затем запуск:
+#
+# bash
+# pytest -m smoke --alluredir=allure-results
+
+# сгенерировать отчет
+# allure serve allure-results
+
