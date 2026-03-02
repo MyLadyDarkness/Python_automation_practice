@@ -1,0 +1,2 @@
+Status get_pet: 200, 
+Body: {'id': 178141, 'category': {'id': 178141, 'name': 'test_pet_178141'}, 'name': 'test_pet_178141', 'photoUrls': ['string'], 'tags': [{'id': 178141, 'name': 'test_pet_178141'}], 'status': 'pending'}

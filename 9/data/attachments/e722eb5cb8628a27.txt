@@ -1,5 +1,0 @@
-Pet from DB:
-{'id': 177933, 'category': {'id': 177933, 'name': 'test_pet_177933'}, 'name': 'test_pet_177933', 'photoUrls': ['string'], 'tags': [{'id': 177933, 'name': 'test_pet_177933'}], 'status': 'sold'}
-
-Created pet:
-{'id': 177933, 'category': {'id': 177933, 'name': 'test_pet_177933'}, 'name': 'test_pet_177933', 'photoUrls': ['string'], 'tags': [{'id': 177933, 'name': 'test_pet_177933'}], 'status': 'sold'}
