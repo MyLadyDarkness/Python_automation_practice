@@ -9,16 +9,20 @@ def pet_store():
 
 @pytest.fixture(scope="function")
 def base_pet_data():
+    unique_number = generated_unique_id()
     pet_data = {
-        "id":f"{generated_unique_id()}",
-        "name": f"test_pet_{generated_unique_id()}",
+        "id":f"{unique_number}",
+        "name": f"test_pet_{unique_number}",
         "photoUrls": ["string"]
     }
     return pet_data
 
+@pytest.fixture
+def state():
+    return "available"
+
 @pytest.fixture(scope="function")
-def full_pet_data(base_pet_data):
-    state = "available"
+def all_pet_data_no_state(base_pet_data, state):
     pet_data = {
         **base_pet_data,
         "category": {
@@ -33,6 +37,7 @@ def full_pet_data(base_pet_data):
         ],
         "status": state
     }
+    return pet_data
 
 @pytest.fixture(scope="function")
 def create_base_pet(pet_store, base_pet_data):
@@ -43,8 +48,8 @@ def create_base_pet(pet_store, base_pet_data):
     pet_store.delete_pet(response.json()["id"])
 
 @pytest.fixture(scope="function")
-def create_full_pet(pet_store, full_pet_data):
-    response = pet_store.create_pet(full_pet_data)
+def create_full_pet(pet_store, all_pet_data_no_state):
+    response = pet_store.create_pet(all_pet_data_no_state)
 
     yield response
 
