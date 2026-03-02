@@ -39,20 +39,50 @@ def test_pet_creation_min_fields(pet_store, base_pet_data, create_base_pet):
         )
 
 
+@pytest.mark.smoke
+@allure.title("Создание питомца со всеми полями и разными статусами")
+@allure.feature("Питомцы")
+@allure.severity(allure.severity_level.NORMAL)
+
 @pytest.mark.parametrize("state", ["available", "pending", "sold"])
-def test_pet_creation_max_fields(pet_store, full_pet_data, create_full_pet, state):
+def test_pet_creation_max_fields(pet_store, all_pet_data_no_state, create_full_pet, state):
     """
     Тест отправляет запрос с максимальным набором полей и проверяет,
     что объект создался для каждого из статусов.
-    Ожидаемый результат 200.
     """
-    assert create_full_pet.status_code == 200
 
-    get_response = pet_store.get_pet(create_full_pet.json()["id"])
-    assert get_response.status_code == 200
-    assert get_response.json()["id"] == int(full_pet_data["id"])
-    ###CHECK ALL FIELDS
+    allure.dynamic.title(f"Тест создания питомца со статусом: {state}")
+    allure.dynamic.description("Проверка POST запроса и последующего GET запроса на соответствие полей")
 
+    with allure.step("1. Создание питомца"):
+        assert create_full_pet.status_code == 200
+        created_pet = create_full_pet.json()
+
+        allure.attach(
+            f"Status created_pet: {create_full_pet.status_code}, \nBody: {created_pet}",
+            name="created_pet response",
+            attachment_type=allure.attachment_type.TEXT
+        )
+
+    with allure.step("2. Получение питомца из БД"):
+        get_pet_from_api = pet_store.get_pet(create_full_pet.json()["id"])
+        actual_pet = get_pet_from_api.json()
+        assert get_pet_from_api.status_code == 200
+
+        allure.attach(
+            f"Status get_pet: {get_pet_from_api.status_code}, \nBody: {actual_pet}",
+            name="get_pet response",
+            attachment_type=allure.attachment_type.TEXT
+        )
+
+    with allure.step("3. Сравнение созданного питомца и полученного из БД"):
+        assert actual_pet == created_pet
+
+        allure.attach(
+            f"Pet from DB:\n{actual_pet}\n\nCreated pet:\n{created_pet}",
+            name="comparison_data",
+            attachment_type=allure.attachment_type.TEXT
+        )
 
 
 def test_pet_creation_duplicate_id(pet_store):
