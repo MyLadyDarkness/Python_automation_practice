@@ -11,7 +11,10 @@ from src.utils.json_helpers import find_text
 @allure.feature("Питомцы")
 @allure.severity(allure.severity_level.CRITICAL)
 def test_pet_creation_min_fields(pet_store, base_pet_data, create_base_pet):
-    """Создание с id, name, photoUrls + проверка через GET"""
+    """
+    Создание с id, name, photoUrls + проверка через GET
+    Swagger: POST /pet Add a new pet to the store
+    """
 
     with allure.step("1. Создание питомца"):
         created_pet = create_base_pet.json()
@@ -44,14 +47,15 @@ def test_pet_creation_min_fields(pet_store, base_pet_data, create_base_pet):
 @allure.feature("Питомцы")
 @allure.severity(allure.severity_level.NORMAL)
 
-@pytest.mark.parametrize("state", ["available", "pending", "sold"])
-def test_pet_creation_max_fields(pet_store, all_pet_data_no_state, create_full_pet, state):
+@pytest.mark.parametrize("status", ["available", "pending", "sold"])
+def test_pet_creation_max_fields(pet_store, all_pet_data_no_state, create_full_pet, status):
     """
-    Тест отправляет запрос с максимальным набором полей и проверяет,
-    что объект создался для каждого из статусов.
+    Создание с максимальным набором полей и проверка
+    через GET для каждого из статусов.
+    Swagger: POST /pet Add a new pet to the store
     """
 
-    allure.dynamic.title(f"Тест создания питомца со статусом: {state}")
+    allure.dynamic.title(f"Тест создания питомца со статусом: {status}")
     allure.dynamic.description("Проверка POST запроса и последующего GET запроса на соответствие полей")
 
     with allure.step("1. Создание питомца"):
@@ -85,50 +89,61 @@ def test_pet_creation_max_fields(pet_store, all_pet_data_no_state, create_full_p
         )
 
 
-def test_pet_creation_duplicate_id(pet_store):
+@pytest.mark.smoke
+@allure.title("Обновление питомца с данными формы")
+@allure.feature("Питомцы")
+@allure.severity(allure.severity_level.NORMAL)
+
+def test_pet_update_form_data(pet_store, base_pet_data, create_base_pet):
     """
-    Тест проверяет, что при создании сущности с дублирующимся
-    id происходит обновление существующей записи
+    Обновление по id и прове
+    рка через GET
+    Swagger: /pet/{pet_id} Updates a pet in the store with form data
     """
 
-    random_number = random.randint(100, 999)
-    pet_data = {
-        "id": f"{random_number}",
-        "name": f"test_pet_{random_number}",
-        "photoUrls": ["string"]
-    }
+    with allure.step("1. Создание питомца"):
+        created_pet = create_base_pet.json()
+        pet_id = created_pet["id"]
 
-    response = pet_store.create_pet(pet_data)
-    pet_id = response.json()["id"]
-    print(f"pet {pet_id} {response.json()}")
+        assert create_base_pet.status_code == 200
 
-    assert response.status_code == 200
-    assert pet_id == int(pet_data["id"])
-    assert response.json()["name"] == pet_data["name"]
+        allure.attach(
+            f"Status created_pet: {create_base_pet.status_code}, \nBody: {created_pet}",
+            name="created_pet response",
+            attachment_type=allure.attachment_type.TEXT
+        )
 
-    get_response = pet_store.get_pet(pet_id)
-    assert get_response.status_code == 200
-    assert pet_id == int(pet_data["id"])
-    assert get_response.json()["name"] == pet_data["name"]
+    with allure.step("2. Обновление питомца"):
+        updated_pet = pet_store.update_pet_form_data(pet_id, name=f"{pet_id}_updated", status="sold")
+        assert updated_pet.status_code == 200
 
-    pet_data_duplicate_id = {
-        "id": f"{pet_id}",
-        "name": f"test_pet_duplicate_id_{random_number}",
-        "photoUrls": ["string"]
-    }
+        allure.attach(
+            f"Status created_pet: {updated_pet.status_code}, \nBody: {updated_pet.json()}",
+            name="created_pet response",
+            attachment_type=allure.attachment_type.TEXT
+        )
 
-    response_duplicate_id = pet_store.create_pet(pet_data_duplicate_id)
+    with allure.step("3. Получение питомца из БД"):
+        get_pet_from_api = pet_store.get_pet(pet_id)
+        actual_pet = get_pet_from_api.json()
+        assert get_pet_from_api.status_code == 200
 
-    print(f"pet {pet_id} {response_duplicate_id.json()}")
-    assert response_duplicate_id.status_code == 200
-    assert pet_id == int(pet_data["id"])
-    assert response_duplicate_id.json()["name"] == pet_data_duplicate_id["name"]
+        allure.attach(
+            f"Status get_pet: {get_pet_from_api.status_code}, \nBody: {actual_pet}",
+            name="get_pet response",
+            attachment_type=allure.attachment_type.TEXT
+        )
 
-    get_response = pet_store.get_pet(pet_id)
-    assert get_response.status_code == 200
-    assert pet_id == int(pet_data["id"])
-    assert get_response.json()["name"] == pet_data_duplicate_id["name"]
+    with allure.step("4. Проерка, что поля обновлены"):
+        assert actual_pet["id"] == pet_id
+        assert actual_pet["name"] == f"{pet_id}_updated"
+        assert actual_pet["status"] == "sold"
 
+        allure.attach(
+            f"Pet from DB:\n{actual_pet}\n\nCreated pet:\n{created_pet}\nUpdated pet:\n{updated_pet.json()}",
+            name="comparison_data",
+            attachment_type=allure.attachment_type.TEXT
+        )
 
 #тест проверяет получение списка питомцев с конкретным статусом
 @pytest.mark.parametrize("state", ["available", "pending", "sold"])
