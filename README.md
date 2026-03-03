@@ -9,7 +9,7 @@
 **Практический репозиторий для системного роста от Junior к Middle QA Automation Engineer на Python.**
 
 ---
-[📊 Посмотреть Allure отчеты](https://myladydarkness.github.io/Python_automation_practice/4/index.html)
+[📊 Посмотреть Allure отчеты](https://myladydarkness.github.io/Python_automation_practice)
 
 ## 📌 Быстрый старт
 
