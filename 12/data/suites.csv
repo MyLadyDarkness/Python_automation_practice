@@ -1,5 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"Проверка POST запроса и последующего GET запроса на соответствие полей","33","Тест создания питомца со статусом: available","tests.petstore-api","Tue Mar 03 12:16:29 UTC 2026","passed","Tue Mar 03 12:16:30 UTC 2026","","test_about_pet","",""
-"Проверка POST запроса и последующего GET запроса на соответствие полей","33","Тест создания питомца со статусом: pending","tests.petstore-api","Tue Mar 03 12:16:30 UTC 2026","passed","Tue Mar 03 12:16:30 UTC 2026","","test_about_pet","",""
-"Проверка POST запроса и последующего GET запроса на соответствие полей","34","Тест создания питомца со статусом: sold","tests.petstore-api","Tue Mar 03 12:16:30 UTC 2026","passed","Tue Mar 03 12:16:30 UTC 2026","","test_about_pet","",""
-"Создание с id, name, photoUrls + проверка через GET","33","Создание питомца с минимальными полями","tests.petstore-api","Tue Mar 03 12:16:29 UTC 2026","passed","Tue Mar 03 12:16:29 UTC 2026","","test_about_pet","",""
