@@ -1,2 +1,0 @@
-Status created_pet: 200, 
-Body: {'id': 177384, 'category': {'id': 177384, 'name': 'test_pet_177384'}, 'name': 'test_pet_177384', 'photoUrls': ['string'], 'tags': [{'id': 177384, 'name': 'test_pet_177384'}], 'status': 'pending'}

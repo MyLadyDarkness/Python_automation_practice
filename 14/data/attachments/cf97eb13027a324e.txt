@@ -1,2 +1,0 @@
-Status get_pet: 200, 
-Body: {'id': 178200, 'name': '178200_updated', 'photoUrls': ['string'], 'tags': [], 'status': 'sold'}
