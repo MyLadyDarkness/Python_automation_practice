@@ -21,7 +21,7 @@ class PetStore(Client):
     def get_pet(self, pet_id):
         return self.get(f"/pet/{pet_id}")
 
-    def get_pet_by_state(self, pet_status):
+    def get_pet_by_status(self, pet_status):
         return self.get(f"/pet/findByStatus", params={"status": pet_status})
 
     def edit_pet(self, pet_data):
