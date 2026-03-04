@@ -18,11 +18,11 @@ def base_pet_data():
     return pet_data
 
 @pytest.fixture
-def state():
+def status():
     return "available"
 
 @pytest.fixture(scope="function")
-def all_pet_data_no_state(base_pet_data, state):
+def all_pet_data_no_state(base_pet_data, status):
     pet_data = {
         **base_pet_data,
         "category": {
@@ -35,7 +35,7 @@ def all_pet_data_no_state(base_pet_data, state):
                 "name": f"test_pet_{base_pet_data['id']}"
             }
         ],
-        "status": state
+        "status": status
     }
     return pet_data
 
