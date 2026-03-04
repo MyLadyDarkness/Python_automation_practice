@@ -96,8 +96,7 @@ def test_pet_creation_max_fields(pet_store, all_pet_data_no_state, create_full_p
 
 def test_pet_update_form_data(pet_store, base_pet_data, create_base_pet):
     """
-    Обновление по id и прове
-    рка через GET
+    Обновление по id и проверка через GET
     Swagger: /pet/{pet_id} Updates a pet in the store with form data
     """
 
@@ -118,8 +117,8 @@ def test_pet_update_form_data(pet_store, base_pet_data, create_base_pet):
         assert updated_pet.status_code == 200
 
         allure.attach(
-            f"Status created_pet: {updated_pet.status_code}, \nBody: {updated_pet.json()}",
-            name="created_pet response",
+            f"Status updated_pet: {updated_pet.status_code}, \nBody: {updated_pet.json()}",
+            name="updated_pet response",
             attachment_type=allure.attachment_type.TEXT
         )
 
@@ -145,39 +144,63 @@ def test_pet_update_form_data(pet_store, base_pet_data, create_base_pet):
             attachment_type=allure.attachment_type.TEXT
         )
 
-#тест проверяет получение списка питомцев с конкретным статусом
-@pytest.mark.parametrize("state", ["available", "pending", "sold"])
-def test_get_pets_by_status(pet_store, state):
 
-        random_number = random.randint(100, 999)
-        pet_data = {
-            "id": random_number,
-            "name": f"test_pet_{random_number}",
-            "status": state
-        }
+@pytest.mark.smoke
+@allure.title("Получение списка питомцев с конкретным статусом")
+@allure.feature("Питомцы")
+@allure.severity(allure.severity_level.NORMAL)
+@pytest.mark.parametrize("status", ["available", "pending", "sold"])
+def test_get_pets_by_status(pet_store, all_pet_data_no_state, create_full_pet, status):
+    """
+    Получение списка питомцев с конкретным статусом
+    Swagger: /pet/findByStatus Finds Pets by status
+    """
 
-        response = pet_store.create_pet(pet_data)
-        pet_id = response.json()["id"]
-        print(f"pet {pet_id} {response.json()}")
+    with allure.step(f"1. Создание питомца со статусом {status}"):
+        created_pet = create_full_pet.json()
+        pet_id = created_pet["id"]
+        pet_name = created_pet["name"]
 
-        assert response.status_code == 200
+        assert create_full_pet.status_code == 200
 
-        pets_by_status_response = pet_store.get_pet_by_state(state)
-        pets_by_status_json = pet_store.get_pet_by_state(state).json()
+        allure.attach(
+            f"Status created_pet: {create_full_pet.status_code}, \nBody: {created_pet}",
+            name="created_pet response",
+            attachment_type=allure.attachment_type.TEXT
+        )
 
+    with allure.step(f"2. Получение из базы всех питомцев со статусом {status}"):
+
+        pets_by_status_response = pet_store.get_pet_by_status(status)
+        pets_by_status_json = pets_by_status_response.json()
+
+        assert pets_by_status_response.status_code == 200
+
+        allure.attach(
+            f"Finds Pets by status response: {pets_by_status_response.status_code}, \nBody: {pets_by_status_json}",
+            name=f"pet with status {status} response",
+            attachment_type=allure.attachment_type.TEXT
+        )
+
+    with allure.step(f"3. Поиск созданного питомца со статусом {status} в ответе от БД"):
         # Комбинация полей для поиска
         found_pet = find_text(
             pets_by_status_json,
-            id=pet_data["id"],
-            name=pet_data["name"],
-            status=state
+            id=pet_id,
+            name=pet_name,
+            status=status
         )
 
-        assert found_pet is not None, f"Питомец не найден в статусе {state}"
-        assert found_pet["id"] == pet_data["id"]
-        assert found_pet["name"] == pet_data["name"]
-        assert found_pet["status"] == state
-        assert pets_by_status_response.status_code == 200
+        allure.attach(
+            f"Expected id {pet_id}\nExpected name: {pet_name}\nFound Object: {found_pet}",
+            name=f"Search Result",
+            attachment_type=allure.attachment_type.TEXT
+        )
+
+        assert found_pet is not None, f"Питомец не найден в статусе {status}"
+        assert found_pet["id"] == pet_id
+        assert found_pet["name"] == pet_name
+        assert found_pet["status"] == status
 
 
 #тест проверяет работу put-запроса для редактирования имеющейся записи
