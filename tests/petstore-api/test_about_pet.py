@@ -133,7 +133,7 @@ def test_pet_update_form_data(pet_store, base_pet_data, create_base_pet):
             attachment_type=allure.attachment_type.TEXT
         )
 
-    with allure.step("4. Проерка, что поля обновлены"):
+    with allure.step("4. Проверка, что поля обновлены"):
         assert actual_pet["id"] == pet_id
         assert actual_pet["name"] == f"{pet_id}_updated"
         assert actual_pet["status"] == "sold"
@@ -203,45 +203,125 @@ def test_get_pets_by_status(pet_store, all_pet_data_no_state, create_full_pet, s
         assert found_pet["status"] == status
 
 
-#тест проверяет работу put-запроса для редактирования имеющейся записи
-def test_edit_pet(pet_store):
-    random_number = random.randint(100, 999)
-    pet_data = {
-        "id": random_number,
-        "name": f"test_pet_{random_number}",
-    }
+@pytest.mark.smoke
+@allure.title("Обновление имеющейся записи с помощью PUT и проверка через GET")
+@allure.feature("Питомцы")
+@allure.severity(allure.severity_level.NORMAL)
+def test_update_pet(pet_store, create_base_pet):
+    """
+    Обновление имеющейся записи с помощью PUT и проверка через GET
+    Swagger: /pet Update an existing pet
+    """
 
-    pet_store.create_pet(pet_data)
+    with allure.step("1. Создание питомца"):
+        created_pet = create_base_pet.json()
+        pet_id = created_pet["id"]
 
-    pet_data["name"] = f"test_pet_put_{random_number}"
-    response = pet_store.edit_pet(pet_data)
+        assert create_base_pet.status_code == 200
 
-    assert response.status_code == 200
-    assert response.json()["id"] == pet_data["id"]
-    assert response.json()["name"] == pet_data["name"]
+        allure.attach(
+            f"Status created_pet: {create_base_pet.status_code}, \nBody: {created_pet}",
+            name="created_pet response",
+            attachment_type=allure.attachment_type.TEXT
+        )
+
+    with allure.step("2. Обновление питомца"):
+        new_name = "updated_json_Murzik"
+        pet_data = {"id":pet_id,"name":new_name}
+        updated_pet = pet_store.update_pet_json(pet_data)
+        assert updated_pet.status_code == 200
+        assert updated_pet.json()["id"] == pet_id
+        assert updated_pet.json()["name"] == new_name
+        assert updated_pet.json()["photoUrls"] == []
+        assert updated_pet.json()["tags"] == []
+
+        allure.attach(
+            f"Status updated_pet: {updated_pet.status_code}, \nBody: {updated_pet.json()}",
+            name="updated_pet response",
+            attachment_type=allure.attachment_type.JSON
+        )
+
+    with allure.step("3. Получение питомца из БД"):
+        get_pet_from_api = pet_store.get_pet(pet_id)
+        actual_pet = get_pet_from_api.json()
+        assert get_pet_from_api.status_code == 200
+
+        allure.attach(
+            f"Status get_pet: {get_pet_from_api.status_code}, \nBody: {actual_pet}",
+            name="get_pet response",
+            attachment_type=allure.attachment_type.JSON
+        )
+
+    with allure.step("4. Проверка, что поля обновлены"):
+        assert actual_pet["id"] == pet_id
+        assert actual_pet["name"] == new_name
+        assert actual_pet["photoUrls"] == []
+        assert actual_pet["tags"] == []
+
+        allure.attach(
+            f"Pet from DB:\n{actual_pet}\n\nCreated pet:\n{created_pet}\nUpdated pet:\n{updated_pet.json()}",
+            name="comparison_data",
+            attachment_type=allure.attachment_type.TEXT
+        )
 
 
-#тест позволяет получить информаци по id
-def test_get_pet(pet_store):
-    random_number = random.randint(100, 999)
-    pet_data = {
-        "id": random_number,
-        "name": f"test_pet_{random_number}",
-    }
-    response = pet_store.create_pet(pet_data)
-    pet_store.get_pet(pet_data["id"])
+@pytest.mark.smoke
+@allure.title("Получение питомца из API")
+@allure.feature("Питомцы")
+@allure.severity(allure.severity_level.NORMAL)
+def test_get_pet(pet_store, create_base_pet):
+    """
+    Получение питомца из API
+    Swagger: /pet/{pet_id} Find pet by ID
+    """
 
-    assert response.status_code == 200
-    assert response.json()["id"] == pet_data["id"]
-    assert response.json()["name"] == pet_data["name"]
+    with allure.step("1. Создание питомца"):
+        created_pet = create_base_pet.json()
+        pet_id = created_pet["id"]
 
-#тест показывает: если с таким id записи нет,то сервер вернет ошибку 404
+        assert create_base_pet.status_code == 200
+
+        allure.attach(
+            f"Status created_pet: {create_base_pet.status_code}, \nBody: {created_pet}",
+            name="created_pet response",
+            attachment_type=allure.attachment_type.TEXT
+        )
+
+    with allure.step("2. Получение питомца из БД"):
+        get_pet_from_api = pet_store.get_pet(pet_id)
+        actual_pet = get_pet_from_api.json()
+        assert get_pet_from_api.status_code == 200
+        assert actual_pet == created_pet
+
+        allure.attach(
+            f"Status get_pet: {get_pet_from_api.status_code}, \nBody: {actual_pet}",
+            name="get_pet response",
+            attachment_type=allure.attachment_type.TEXT
+        )
+
+
+@pytest.mark.smoke
+@allure.title("Получение питомца из API. НЕГАТИВНЫЙ ТЕСТ, id  не существует")
+@allure.feature("Питомцы")
+@allure.severity(allure.severity_level.NORMAL)
 def test_get_pet_absent(pet_store):
+    """
+    Получение питомца из API. НЕГАТИВНЫЙ ТЕСТ, id  не существует
+    Swagger: /pet/{pet_id} Find pet by ID
+    """
+
     pet_id = int(time.time())
 
-    response = pet_store.get_pet(pet_id)
+    with allure.step("1. Получение питомца с несуществуеющим id"):
+        response = pet_store.get_pet(pet_id)
 
-    assert response.status_code == 404, (
-        f"Ожидался код 404 для несуществующего питомца {pet_id}, "
-        f"получен {response.status_code}"
-    )
+        assert response.status_code == 404, (
+            f"Ожидался код 404 для несуществующего питомца {pet_id}, "
+            f"получен {response.status_code}"
+        )
+
+        allure.attach(
+            f"Status get_pet: {response.status_code},\nError text: {response.json()} \nPet id: {pet_id}",
+            name="get_pet response",
+            attachment_type=allure.attachment_type.TEXT
+        )

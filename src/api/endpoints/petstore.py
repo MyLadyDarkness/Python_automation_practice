@@ -17,6 +17,8 @@ class PetStore(Client):
 
         return self.post(f"/pet/{pet_id}", data = pet_data)
 
+    def update_pet_json(self, pet_data):
+        return self.put("/pet", json = pet_data)
 
     def get_pet(self, pet_id):
         return self.get(f"/pet/{pet_id}")

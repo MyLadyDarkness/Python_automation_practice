@@ -11,8 +11,8 @@ class Client:
     def post(self, endpoint, **kwargs):
         return self.session.post(f"{self.base_url}{endpoint}", **kwargs)
 
-    def put(self, endpoint, json=None):
-        return self.session.put(f"{self.base_url}{endpoint}", json=json)
+    def put(self, endpoint, **kwargs):
+        return self.session.put(f"{self.base_url}{endpoint}", **kwargs)
 
     def delete(self, endpoint):
         return self.session.delete(f"{self.base_url}{endpoint}")
