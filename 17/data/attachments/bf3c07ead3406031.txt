@@ -1,0 +1,2 @@
+Status created_pet: 200, 
+Body: {'id': 178096, 'name': 'test_pet_178096', 'photoUrls': ['string'], 'tags': []}

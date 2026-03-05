@@ -1,0 +1,2 @@
+Status get_pet: 200, 
+Body: {'id': 178254, 'name': '178254_updated', 'photoUrls': ['string'], 'tags': [], 'status': 'sold'}

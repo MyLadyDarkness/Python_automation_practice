@@ -1,0 +1,36 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"
+Получение списка питомцев с конкретным статусом
+Swagger: /pet/findByStatus Finds Pets by status
+","7","Получение списка питомцев с конкретным статусом","tests.petstore-api","Thu Mar 05 15:12:53 UTC 2026","passed","Thu Mar 05 15:12:53 UTC 2026","","test_about_pet","",""
+"
+Получение списка питомцев с конкретным статусом
+Swagger: /pet/findByStatus Finds Pets by status
+","7","Получение списка питомцев с конкретным статусом","tests.petstore-api","Thu Mar 05 15:12:53 UTC 2026","passed","Thu Mar 05 15:12:53 UTC 2026","","test_about_pet","",""
+"
+Обновление по id и проверка через GET
+Swagger: /pet/{pet_id} Updates a pet in the store with form data
+","11","Обновление питомца с данными формы","tests.petstore-api","Thu Mar 05 15:12:53 UTC 2026","passed","Thu Mar 05 15:12:53 UTC 2026","","test_about_pet","",""
+"Проверка POST запроса и последующего GET запроса на соответствие полей","6","Тест создания питомца со статусом: sold","tests.petstore-api","Thu Mar 05 15:12:53 UTC 2026","passed","Thu Mar 05 15:12:53 UTC 2026","","test_about_pet","",""
+"Проверка POST запроса и последующего GET запроса на соответствие полей","5","Тест создания питомца со статусом: available","tests.petstore-api","Thu Mar 05 15:12:53 UTC 2026","passed","Thu Mar 05 15:12:53 UTC 2026","","test_about_pet","",""
+"
+Получение питомца из API
+Swagger: /pet/{pet_id} Find pet by ID
+","6","Получение питомца из API","tests.petstore-api","Thu Mar 05 15:12:53 UTC 2026","passed","Thu Mar 05 15:12:53 UTC 2026","","test_about_pet","",""
+"
+Обновление имеющейся записи с помощью PUT и проверка через GET
+Swagger: /pet Update an existing pet
+","10","Обновление имеющейся записи с помощью PUT и проверка через GET","tests.petstore-api","Thu Mar 05 15:12:53 UTC 2026","passed","Thu Mar 05 15:12:53 UTC 2026","","test_about_pet","",""
+"
+Получение списка питомцев с конкретным статусом
+Swagger: /pet/findByStatus Finds Pets by status
+","17","Получение списка питомцев с конкретным статусом","tests.petstore-api","Thu Mar 05 15:12:53 UTC 2026","passed","Thu Mar 05 15:12:53 UTC 2026","","test_about_pet","",""
+"
+Получение питомца из API. НЕГАТИВНЫЙ ТЕСТ, id  не существует
+Swagger: /pet/{pet_id} Find pet by ID
+","5","Получение питомца из API. НЕГАТИВНЫЙ ТЕСТ, id  не существует","tests.petstore-api","Thu Mar 05 15:12:53 UTC 2026","passed","Thu Mar 05 15:12:53 UTC 2026","","test_about_pet","",""
+"
+Создание с id, name, photoUrls + проверка через GET
+Swagger: POST /pet Add a new pet to the store
+","5","Создание питомца с минимальными полями","tests.petstore-api","Thu Mar 05 15:12:53 UTC 2026","passed","Thu Mar 05 15:12:53 UTC 2026","","test_about_pet","",""
+"Проверка POST запроса и последующего GET запроса на соответствие полей","6","Тест создания питомца со статусом: pending","tests.petstore-api","Thu Mar 05 15:12:53 UTC 2026","passed","Thu Mar 05 15:12:53 UTC 2026","","test_about_pet","",""
