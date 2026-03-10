@@ -1,3 +1,5 @@
 selenium~=4.40.0
-pytest~=9.0.2
+pytest>=9.0.2
 requests~=2.32.5
+
+allure-python-commons~=2.15.3
