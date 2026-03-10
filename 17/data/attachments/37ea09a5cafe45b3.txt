@@ -1,7 +1,0 @@
-Pet from DB:
-{'id': 178254, 'name': '178254_updated', 'photoUrls': ['string'], 'tags': [], 'status': 'sold'}
-
-Created pet:
-{'id': 178254, 'name': 'test_pet_178254', 'photoUrls': ['string'], 'tags': []}
-Updated pet:
-{'code': 200, 'type': 'unknown', 'message': '178254'}

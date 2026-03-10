@@ -1,0 +1,2 @@
+Status deleted_pet: 200, 
+Body: <Response [200]>

@@ -1,3 +1,0 @@
-Status get_pet: 404,
-Error text: {'code': 1, 'type': 'error', 'message': 'Pet not found'} 
-Pet id: 1772723573
