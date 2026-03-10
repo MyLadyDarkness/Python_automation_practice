@@ -97,7 +97,7 @@ def test_pet_creation_max_fields(pet_store, all_pet_data_no_state, create_full_p
 def test_pet_update_form_data(pet_store, base_pet_data, create_base_pet):
     """
     Обновление по id и проверка через GET
-    Swagger: /pet/{pet_id} Updates a pet in the store with form data
+    Swagger: POST /pet/{pet_id} Updates a pet in the store with form data
     """
 
     with allure.step("1. Создание питомца"):
@@ -153,7 +153,7 @@ def test_pet_update_form_data(pet_store, base_pet_data, create_base_pet):
 def test_get_pets_by_status(pet_store, all_pet_data_no_state, create_full_pet, status):
     """
     Получение списка питомцев с конкретным статусом
-    Swagger: /pet/findByStatus Finds Pets by status
+    Swagger: GET /pet/findByStatus Finds Pets by status
     """
 
     with allure.step(f"1. Создание питомца со статусом {status}"):
@@ -210,7 +210,7 @@ def test_get_pets_by_status(pet_store, all_pet_data_no_state, create_full_pet, s
 def test_update_pet(pet_store, create_base_pet):
     """
     Обновление имеющейся записи с помощью PUT и проверка через GET
-    Swagger: /pet Update an existing pet
+    Swagger: PUT /pet Update an existing pet
     """
 
     with allure.step("1. Создание питомца"):
@@ -272,7 +272,7 @@ def test_update_pet(pet_store, create_base_pet):
 def test_get_pet(pet_store, create_base_pet):
     """
     Получение питомца из API
-    Swagger: /pet/{pet_id} Find pet by ID
+    Swagger: GET /pet/{pet_id} Find pet by ID
     """
 
     with allure.step("1. Создание питомца"):
@@ -307,7 +307,7 @@ def test_get_pet(pet_store, create_base_pet):
 def test_get_pet_absent(pet_store):
     """
     Получение питомца из API. НЕГАТИВНЫЙ ТЕСТ, id  не существует
-    Swagger: /pet/{pet_id} Find pet by ID
+    Swagger: GET /pet/{pet_id} Find pet by ID
     """
 
     pet_id = int(time.time())
@@ -323,5 +323,77 @@ def test_get_pet_absent(pet_store):
         allure.attach(
             f"Status get_pet: {response.status_code},\nError text: {response.json()} \nPet id: {pet_id}",
             name="get_pet response",
+            attachment_type=allure.attachment_type.TEXT
+        )
+
+
+@pytest.mark.smoke
+@allure.title("Удаление питомца из API")
+@allure.feature("Питомцы")
+@allure.severity(allure.severity_level.NORMAL)
+def test_delete_pet(pet_store, create_base_pet):
+    """
+    Удаление питомца из API
+    Swagger: DELETE /pet/{pet_id} Find pet by ID
+    """
+
+    with allure.step("1. Создание питомца"):
+        created_pet = create_base_pet.json()
+        pet_id = created_pet["id"]
+
+        assert create_base_pet.status_code == 200
+
+        allure.attach(
+            f"Status created_pet: {create_base_pet.status_code}, \nBody: {created_pet}",
+            name="created_pet response",
+            attachment_type=allure.attachment_type.TEXT
+        )
+
+    with allure.step("2. Удаление питомца"):
+        response = pet_store.delete_pet(pet_id)
+
+        assert response.status_code == 200
+
+        allure.attach(
+            f"Status deleted_pet: {response.status_code}, \nBody: {response}",
+            name="deleted_pet response",
+            attachment_type=allure.attachment_type.TEXT
+        )
+
+    with allure.step("3. Получение питомца с несуществуеющим id"):
+        response = pet_store.get_pet(pet_id)
+
+        assert response.status_code == 404, (
+            f"Ожидался код 404 для несуществующего питомца {pet_id}, "
+            f"получен {response.status_code}"
+        )
+
+        allure.attach(
+            f"Status get_pet: {response.status_code},\nError text: {response.json()} \nPet id: {pet_id}",
+            name="get_pet response",
+            attachment_type=allure.attachment_type.TEXT
+        )
+
+
+@pytest.mark.smoke
+@allure.title("Удаление питомца из API. НЕГАТИВНЫЙ ТЕСТ, id  не существует")
+@allure.feature("Питомцы")
+@allure.severity(allure.severity_level.NORMAL)
+def test_delete_pet_absent(pet_store):
+    """
+    Удаление питомца из API.НЕГАТИВНЫЙ ТЕСТ, id  не существует
+    Swagger: DELETE /pet/{pet_id} Find pet by ID
+    """
+
+    pet_id = int(time.time())
+
+    with allure.step("1. Удаление питомца с несуществуеющим id"):
+        response = pet_store.delete_pet(pet_id)
+
+        assert response.status_code == 404
+
+        allure.attach(
+            f"Status deleted_pet: {response.status_code}, \nBody: {response}",
+            name="deleted_pet response",
             attachment_type=allure.attachment_type.TEXT
         )
