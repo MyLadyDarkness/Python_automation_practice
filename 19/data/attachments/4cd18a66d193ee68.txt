@@ -1,0 +1,7 @@
+Pet from DB:
+{'id': 177547, 'name': 'updated_json_Murzik', 'photoUrls': [], 'tags': []}
+
+Created pet:
+{'id': 177547, 'name': 'test_pet_177547', 'photoUrls': ['string'], 'tags': []}
+Updated pet:
+{'id': 177547, 'name': 'updated_json_Murzik', 'photoUrls': [], 'tags': []}

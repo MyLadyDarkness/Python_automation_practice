@@ -1,0 +1,2 @@
+Finds Pets by status response: 200, 
+Body: [{'id': 9, 'category': {'id': 0, 'name': 'cats'}, 'name': 'King Kong', 'photoUrls': ['string'], 'tags': [{'id': 0, 'name': 'string'}], 'status': 'sold'}, {'id': 12, 'category': {'id': 0, 'name': 'dogs'}, 'name': 'Fido', 'photoUrls': ['string'], 'tags': [{'id': 0, 'name': 'string'}], 'status': 'sold'}, {'id': 177739, 'category': {'id': 177739, 'name': 'test_pet_177739'}, 'name': 'test_pet_177739', 'photoUrls': ['string'], 'tags': [{'id': 177739, 'name': 'test_pet_177739'}], 'status': 'sold'}]

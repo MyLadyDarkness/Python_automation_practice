@@ -1,0 +1,44 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"Проверка POST запроса и последующего GET запроса на соответствие полей","21","Тест создания питомца со статусом: pending","tests.petstore-api","Tue Mar 10 15:25:45 UTC 2026","passed","Tue Mar 10 15:25:45 UTC 2026","","test_about_pet","",""
+"Проверка POST запроса и последующего GET запроса на соответствие полей","20","Тест создания питомца со статусом: sold","tests.petstore-api","Tue Mar 10 15:25:45 UTC 2026","passed","Tue Mar 10 15:25:45 UTC 2026","","test_about_pet","",""
+"
+Удаление питомца из API.НЕГАТИВНЫЙ ТЕСТ, id  не существует
+Swagger: DELETE /pet/{pet_id} Find pet by ID
+","20","Удаление питомца из API. НЕГАТИВНЫЙ ТЕСТ, id  не существует","tests.petstore-api","Tue Mar 10 15:25:45 UTC 2026","passed","Tue Mar 10 15:25:45 UTC 2026","","test_about_pet","",""
+"
+Получение питомца из API
+Swagger: GET /pet/{pet_id} Find pet by ID
+","20","Получение питомца из API","tests.petstore-api","Tue Mar 10 15:25:45 UTC 2026","passed","Tue Mar 10 15:25:45 UTC 2026","","test_about_pet","",""
+"Проверка POST запроса и последующего GET запроса на соответствие полей","20","Тест создания питомца со статусом: available","tests.petstore-api","Tue Mar 10 15:25:45 UTC 2026","passed","Tue Mar 10 15:25:45 UTC 2026","","test_about_pet","",""
+"
+Получение списка питомцев с конкретным статусом
+Swagger: GET /pet/findByStatus Finds Pets by status
+","57","Получение списка питомцев с конкретным статусом","tests.petstore-api","Tue Mar 10 15:25:45 UTC 2026","passed","Tue Mar 10 15:25:45 UTC 2026","","test_about_pet","",""
+"
+Получение списка питомцев с конкретным статусом
+Swagger: GET /pet/findByStatus Finds Pets by status
+","21","Получение списка питомцев с конкретным статусом","tests.petstore-api","Tue Mar 10 15:25:45 UTC 2026","passed","Tue Mar 10 15:25:45 UTC 2026","","test_about_pet","",""
+"
+Получение списка питомцев с конкретным статусом
+Swagger: GET /pet/findByStatus Finds Pets by status
+","20","Получение списка питомцев с конкретным статусом","tests.petstore-api","Tue Mar 10 15:25:45 UTC 2026","passed","Tue Mar 10 15:25:45 UTC 2026","","test_about_pet","",""
+"
+Обновление имеющейся записи с помощью PUT и проверка через GET
+Swagger: PUT /pet Update an existing pet
+","41","Обновление имеющейся записи с помощью PUT и проверка через GET","tests.petstore-api","Tue Mar 10 15:25:45 UTC 2026","passed","Tue Mar 10 15:25:45 UTC 2026","","test_about_pet","",""
+"
+Создание с id, name, photoUrls + проверка через GET
+Swagger: POST /pet Add a new pet to the store
+","20","Создание питомца с минимальными полями","tests.petstore-api","Tue Mar 10 15:25:45 UTC 2026","passed","Tue Mar 10 15:25:45 UTC 2026","","test_about_pet","",""
+"
+Обновление по id и проверка через GET
+Swagger: POST /pet/{pet_id} Updates a pet in the store with form data
+","41","Обновление питомца с данными формы","tests.petstore-api","Tue Mar 10 15:25:45 UTC 2026","passed","Tue Mar 10 15:25:45 UTC 2026","","test_about_pet","",""
+"
+Получение питомца из API. НЕГАТИВНЫЙ ТЕСТ, id  не существует
+Swagger: GET /pet/{pet_id} Find pet by ID
+","20","Получение питомца из API. НЕГАТИВНЫЙ ТЕСТ, id  не существует","tests.petstore-api","Tue Mar 10 15:25:45 UTC 2026","passed","Tue Mar 10 15:25:45 UTC 2026","","test_about_pet","",""
+"
+Удаление питомца из API
+Swagger: DELETE /pet/{pet_id} Find pet by ID
+","40","Удаление питомца из API","tests.petstore-api","Tue Mar 10 15:25:45 UTC 2026","passed","Tue Mar 10 15:25:45 UTC 2026","","test_about_pet","",""

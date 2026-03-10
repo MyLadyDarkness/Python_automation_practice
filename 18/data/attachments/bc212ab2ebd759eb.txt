@@ -1,2 +1,0 @@
-Status created_pet: 200, 
-Body: {'id': 177907, 'name': 'test_pet_177907', 'photoUrls': ['string'], 'tags': []}

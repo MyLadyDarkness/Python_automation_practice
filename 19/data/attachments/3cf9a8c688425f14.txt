@@ -1,0 +1,2 @@
+Finds Pets by status response: 200, 
+Body: [{'id': 177776, 'category': {'id': 177776, 'name': 'test_pet_177776'}, 'name': 'test_pet_177776', 'photoUrls': ['string'], 'tags': [{'id': 177776, 'name': 'test_pet_177776'}], 'status': 'pending'}]
