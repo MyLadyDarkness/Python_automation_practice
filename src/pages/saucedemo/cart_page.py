@@ -3,6 +3,9 @@ from src.pages.saucedemo.base_page import SauceBasePage
 from selenium.common.exceptions import NoSuchElementException
 import pytest
 
+from src.utils.checkout_information import checkout_information
+
+
 class CartPage(SauceBasePage):
 
     def count_cart_items(self):
@@ -33,23 +36,17 @@ class CartPage(SauceBasePage):
     def checkout(self):
         cart_items = self.driver.find_elements(By.CLASS_NAME, "cart_item")
         if cart_items:
-            self.find((By.CSS_SELECTOR, "class*=checkout_button")).click()
+            self.find((By.ID, "checkout")).click()
 
         else:
             raise Exception("Cannot checkout: cart is empty")
 
-    # def purchase(self):
-    #     # cart_items = self.driver.find_elements(By.CLASS_NAME, "cart_item")
-    #     # if cart_items:
-    #     #     self.find((By.CSS_SELECTOR, "class*=checkout_button")).click()
-    #         assert self.find((By.CLASS_NAME, "title")).text == "Checkout: Your Information"
-    #
-    #         self.find((By.CSS_SELECTOR, "placeholder=First Name")).send_keys("Test First")
-    #         self.find((By.CSS_SELECTOR, "placeholder=Last Name")).send_keys("Test Last")
-    #         self.find((By.CSS_SELECTOR, "placeholder=Zip/Postal Code")).send_keys("299045")
-    #
-    #         self.find((By.ID, "continue")).click()
-    #
-    #         assert self.find((By.CLASS_NAME, "title")).text == "Checkout: Your Information"
-    #         self.find((By.ID, "finish")).click()
+    def fill_checkout_information(self):
+        checkout_info = checkout_information()
+        self.driver.find_element(By.ID, "first-name").send_keys(checkout_info["first-name"])
+        self.driver.find_element(By.ID, "last-name").send_keys(checkout_info["last-name"])
+        self.driver.find_element(By.ID, "postal-code").send_keys(checkout_info["postal-code"])
+        self.driver.find_element(By.ID, "continue").click()
 
+    def purchase(self):
+        self.driver.find_element(By.ID, "finish").click()
