@@ -1,2 +1,0 @@
-Status deleted_pet: 404, 
-Body: <Response [404]>
