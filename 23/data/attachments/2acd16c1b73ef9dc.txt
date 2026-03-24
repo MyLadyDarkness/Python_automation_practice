@@ -1,0 +1,3 @@
+Expected id 178115
+Expected name: test_pet_178115
+Found Object: {'id': 178115, 'category': {'id': 178115, 'name': 'test_pet_178115'}, 'name': 'test_pet_178115', 'photoUrls': ['string'], 'tags': [{'id': 178115, 'name': 'test_pet_178115'}], 'status': 'available'}

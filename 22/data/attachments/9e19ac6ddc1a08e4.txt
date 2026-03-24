@@ -1,3 +1,0 @@
-Expected id 177789
-Expected name: test_pet_177789
-Found Object: {'id': 177789, 'category': {'id': 177789, 'name': 'test_pet_177789'}, 'name': 'test_pet_177789', 'photoUrls': ['string'], 'tags': [{'id': 177789, 'name': 'test_pet_177789'}], 'status': 'pending'}
