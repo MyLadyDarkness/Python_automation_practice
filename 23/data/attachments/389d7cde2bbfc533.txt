@@ -1,3 +1,0 @@
-Expected id 177628
-Expected name: test_pet_177628
-Found Object: {'id': 177628, 'category': {'id': 177628, 'name': 'test_pet_177628'}, 'name': 'test_pet_177628', 'photoUrls': ['string'], 'tags': [{'id': 177628, 'name': 'test_pet_177628'}], 'status': 'sold'}

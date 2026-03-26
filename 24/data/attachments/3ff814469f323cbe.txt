@@ -1,0 +1,3 @@
+Expected id 177752
+Expected name: test_pet_177752
+Found Object: {'id': 177752, 'category': {'id': 177752, 'name': 'test_pet_177752'}, 'name': 'test_pet_177752', 'photoUrls': ['string'], 'tags': [{'id': 177752, 'name': 'test_pet_177752'}], 'status': 'available'}

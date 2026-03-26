@@ -1,0 +1,5 @@
+Pet from DB:
+{'id': 177764, 'category': {'id': 177764, 'name': 'test_pet_177764'}, 'name': 'test_pet_177764', 'photoUrls': ['string'], 'tags': [{'id': 177764, 'name': 'test_pet_177764'}], 'status': 'available'}
+
+Created pet:
+{'id': 177764, 'category': {'id': 177764, 'name': 'test_pet_177764'}, 'name': 'test_pet_177764', 'photoUrls': ['string'], 'tags': [{'id': 177764, 'name': 'test_pet_177764'}], 'status': 'available'}
