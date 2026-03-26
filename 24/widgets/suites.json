@@ -1,1 +1,0 @@
-{"total":2,"items":[{"uid":"5acfd3e8b4dc534bf072f03bd180460b","name":"tests.saucedemo-ui","statistic":{"failed":0,"broken":4,"skipped":0,"passed":0,"unknown":0,"total":4}},{"uid":"0b56ea1d2a1df5bb7f86f62f359b9e3b","name":"tests.petstore-api","statistic":{"failed":0,"broken":0,"skipped":0,"passed":13,"unknown":0,"total":13}}]}

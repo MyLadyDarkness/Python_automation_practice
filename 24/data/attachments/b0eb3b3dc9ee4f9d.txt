@@ -1,7 +1,0 @@
-Pet from DB:
-{'id': 177869, 'name': 'updated_json_Murzik', 'photoUrls': [], 'tags': []}
-
-Created pet:
-{'id': 177869, 'name': 'test_pet_177869', 'photoUrls': ['string'], 'tags': []}
-Updated pet:
-{'id': 177869, 'name': 'updated_json_Murzik', 'photoUrls': [], 'tags': []}
