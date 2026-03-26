@@ -1,0 +1,48 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"
+Обновление по id и проверка через GET
+Swagger: POST /pet/{pet_id} Updates a pet in the store with form data
+","112","Обновление питомца с данными формы","tests.petstore-api","Thu Mar 26 15:09:18 UTC 2026","passed","Thu Mar 26 15:09:18 UTC 2026","","test_about_pet","",""
+"","0","Вход в систему. НЕГАТИВНЫЙ ТСЕТ","tests.saucedemo-ui","Thu Mar 26 15:09:28 UTC 2026","broken","Thu Mar 26 15:09:28 UTC 2026","","test_login","",""
+"
+Создание с id, name, photoUrls + проверка через GET
+Swagger: POST /pet Add a new pet to the store
+","58","Создание питомца с минимальными полями","tests.petstore-api","Thu Mar 26 15:09:17 UTC 2026","passed","Thu Mar 26 15:09:17 UTC 2026","","test_about_pet","",""
+"
+Получение питомца из API. НЕГАТИВНЫЙ ТЕСТ, id  не существует
+Swagger: GET /pet/{pet_id} Find pet by ID
+","56","Получение питомца из API. НЕГАТИВНЫЙ ТЕСТ, id  не существует","tests.petstore-api","Thu Mar 26 15:09:19 UTC 2026","passed","Thu Mar 26 15:09:19 UTC 2026","","test_about_pet","",""
+"","0","Вход в систему. НЕГАТИВНЫЙ ТСЕТ","tests.saucedemo-ui","Thu Mar 26 15:09:28 UTC 2026","broken","Thu Mar 26 15:09:28 UTC 2026","","test_login","",""
+"
+Получение списка питомцев с конкретным статусом
+Swagger: GET /pet/findByStatus Finds Pets by status
+","57","Получение списка питомцев с конкретным статусом","tests.petstore-api","Thu Mar 26 15:09:18 UTC 2026","passed","Thu Mar 26 15:09:19 UTC 2026","","test_about_pet","",""
+"Проверка POST запроса и последующего GET запроса на соответствие полей","57","Тест создания питомца со статусом: sold","tests.petstore-api","Thu Mar 26 15:09:18 UTC 2026","passed","Thu Mar 26 15:09:18 UTC 2026","","test_about_pet","",""
+"
+Удаление питомца из API
+Swagger: DELETE /pet/{pet_id} Find pet by ID
+","111","Удаление питомца из API","tests.petstore-api","Thu Mar 26 15:09:19 UTC 2026","passed","Thu Mar 26 15:09:19 UTC 2026","","test_about_pet","",""
+"Проверка POST запроса и последующего GET запроса на соответствие полей","56","Тест создания питомца со статусом: pending","tests.petstore-api","Thu Mar 26 15:09:18 UTC 2026","passed","Thu Mar 26 15:09:18 UTC 2026","","test_about_pet","",""
+"
+Получение питомца из API
+Swagger: GET /pet/{pet_id} Find pet by ID
+","56","Получение питомца из API","tests.petstore-api","Thu Mar 26 15:09:19 UTC 2026","passed","Thu Mar 26 15:09:19 UTC 2026","","test_about_pet","",""
+"
+Обновление имеющейся записи с помощью PUT и проверка через GET
+Swagger: PUT /pet Update an existing pet
+","112","Обновление имеющейся записи с помощью PUT и проверка через GET","tests.petstore-api","Thu Mar 26 15:09:19 UTC 2026","passed","Thu Mar 26 15:09:19 UTC 2026","","test_about_pet","",""
+"","0","Вход в систему. НЕГАТИВНЫЙ ТСЕТ","tests.saucedemo-ui","Thu Mar 26 15:09:25 UTC 2026","broken","Thu Mar 26 15:09:25 UTC 2026","","test_login","",""
+"Проверка POST запроса и последующего GET запроса на соответствие полей","56","Тест создания питомца со статусом: available","tests.petstore-api","Thu Mar 26 15:09:17 UTC 2026","passed","Thu Mar 26 15:09:18 UTC 2026","","test_about_pet","",""
+"
+Получение списка питомцев с конкретным статусом
+Swagger: GET /pet/findByStatus Finds Pets by status
+","165","Получение списка питомцев с конкретным статусом","tests.petstore-api","Thu Mar 26 15:09:18 UTC 2026","passed","Thu Mar 26 15:09:18 UTC 2026","","test_about_pet","",""
+"","0","Вход в систему. НЕГАТИВНЫЙ ТСЕТ","tests.saucedemo-ui","Thu Mar 26 15:09:27 UTC 2026","broken","Thu Mar 26 15:09:27 UTC 2026","","test_login","",""
+"
+Удаление питомца из API.НЕГАТИВНЫЙ ТЕСТ, id  не существует
+Swagger: DELETE /pet/{pet_id} Find pet by ID
+","56","Удаление питомца из API. НЕГАТИВНЫЙ ТЕСТ, id  не существует","tests.petstore-api","Thu Mar 26 15:09:19 UTC 2026","passed","Thu Mar 26 15:09:19 UTC 2026","","test_about_pet","",""
+"
+Получение списка питомцев с конкретным статусом
+Swagger: GET /pet/findByStatus Finds Pets by status
+","58","Получение списка питомцев с конкретным статусом","tests.petstore-api","Thu Mar 26 15:09:19 UTC 2026","passed","Thu Mar 26 15:09:19 UTC 2026","","test_about_pet","",""
