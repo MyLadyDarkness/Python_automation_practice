@@ -26,9 +26,6 @@ jobs:
         run: python -m pytest tests/petstore-api/ -m smoke --alluredir=allure-results
 
 
-      - name: Checkout code
-        uses: actions/checkout@v2
-
       - name: Start ChromeDriver
         run: nohup chromedriver --port=9515 &
 
