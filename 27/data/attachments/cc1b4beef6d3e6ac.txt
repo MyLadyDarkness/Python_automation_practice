@@ -1,0 +1,7 @@
+Pet from DB:
+{'id': 177803, 'name': '177803_updated', 'photoUrls': ['string'], 'tags': [], 'status': 'sold'}
+
+Created pet:
+{'id': 177803, 'name': 'test_pet_177803', 'photoUrls': ['string'], 'tags': []}
+Updated pet:
+{'code': 200, 'type': 'unknown', 'message': '177803'}
