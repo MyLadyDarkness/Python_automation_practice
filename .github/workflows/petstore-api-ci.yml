@@ -24,18 +24,7 @@ jobs:
 
       - name: Run smoke tests api
         run: python -m pytest tests/petstore-api/ -m smoke --alluredir=allure-results
-
-
-      - name: Start ChromeDriver
-        run: nohup chromedriver --port=9515 &
-
-      - name: Run smoke tests ui
-        run: python -m pytest tests/saucedemo-ui/ -m smoke --alluredir=allure-results
-
-      - name: Stop ChromeDriver
-        run: pkill chromedriver
-
-
+  
       - name: Upload Allure results
         uses: actions/upload-artifact@v4
         if: always()
