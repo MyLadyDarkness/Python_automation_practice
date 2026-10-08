@@ -1,0 +1,3 @@
+Expected id 180012
+Expected name: test_pet_180012
+Found Object: {'id': 180012, 'category': {'id': 180012, 'name': 'test_pet_180012'}, 'name': 'test_pet_180012', 'photoUrls': ['string'], 'tags': [{'id': 180012, 'name': 'test_pet_180012'}], 'status': 'pending'}
