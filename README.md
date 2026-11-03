@@ -15,16 +15,23 @@
 
 ```bash
 # 1. Клонировать репозиторий
-git clone https://github.com/<ваш-логин>/python-automation-practice.git
+git clone https://github.com/MyLadyDarkness/Python_automation_practice
 
 # 2. Перейти в папку проекта
 cd python-automation-practice
 
-# 3. Установить зависимости
+# 3. Создать и активировать виртуальное окружение
+python -m venv .venv
+
+Активация:
+Windows: .venv\Scripts\activate
+Linux: source .venv/bin/activate
+
+# 4. Установить зависимости
 pip install -r requirements.txt
 
-# 4. Запустить тесты
-pytest tests/ -v --html=reports/report.html
+# 5. Запустить тесты
+python -m pytest -v
 
 🎯 Цели проекта
 Цель	Статус
